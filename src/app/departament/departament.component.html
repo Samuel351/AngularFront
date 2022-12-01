@@ -1,0 +1,20 @@
+<body>
+    <h1>Departamentos</h1>
+    <table id="table">
+        <thead>
+            <tr>
+                <td>Nome</td>
+                <td>Sigla</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+        <tbody *ngFor="let departament of departaments">
+            <tr>
+                <td>{{departament.nome}}</td>
+                <td>{{departament.sigla}}</td>
+                <td><button>Editar</button> <button>Deletar</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button>Adicionar</button>
+</body>

@@ -1,0 +1,25 @@
+
+<body>
+    <div>
+        <h1>Funcionários</h1>
+        <table id="table" class="table">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Email</td>
+                    <td>RG</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody *ngFor="let worker of workers">
+                <tr>
+                    <td>{{worker.nome}}</td>
+                    <td>{{worker.email}}</td>
+                    <td>{{worker.rg}}</td>
+                    <td><button>Editar</button> <button>Deletar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button>Adicionar</button>
+    </div>
+</body>
