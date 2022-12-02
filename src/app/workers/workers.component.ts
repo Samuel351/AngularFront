@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkerService } from '../service/worker.service';
 import { Component, OnInit } from '@angular/core';
-import { IWorker } from '../worker';
+import { IWorker } from '../models/worker';
 
 @Component({
   selector: 'app-workers',

@@ -1,6 +1,24 @@
-<br>
-<br>
 <body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">My Company</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/worker" routerLinkActive="active">Funcionários <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/departament" routerLinkActive="active">Departamento</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Minha conta</a>
+        </li>
+      </ul>
+    </div>
+</nav>
     <table id="table" class="table">
         <thead>
             <caption>
@@ -22,9 +40,10 @@
         <tfoot>
             <tr>
                 <td></td>
-                <td scope="row"><button class="btn btn-primary">Adicionar</button></td>
+                <td scope="row"><a routerLink="/adicionarDepartamento" routerLinkActive="active"><button class="btn btn-primary">Adicionar</button></a></td>
                 <td></td>
             </tr>
         </tfoot>
     </table>
 </body>
+<router-outlet></router-outlet>

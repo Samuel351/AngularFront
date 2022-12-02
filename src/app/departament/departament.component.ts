@@ -1,6 +1,6 @@
 import { DepartamentService } from '../service/departament.service';
 import { Component, OnInit } from '@angular/core';
-import { IDepartament } from '../departament';
+import { IDepartament } from '../models/departament';
 
 @Component({
   selector: 'app-departament',

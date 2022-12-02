@@ -1,6 +1,24 @@
-<br>
-<br>
 <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">My Company</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/worker" routerLinkActive="active">Funcionários <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/departament" routerLinkActive="active">Departamento</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Minha conta</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
     <div>
         <table id="table" class="table">
             <thead>
@@ -16,6 +34,7 @@
             </thead>
             <tbody *ngFor="let worker of workers">
                 <tr>
+                  <td><img src={{worker.foto}}></td>
                     <td scope="row">{{worker.nome}}</td>
                     <td scope="row">{{worker.email}}</td>
                     <td scope="row">{{worker.rg}}</td>
@@ -25,10 +44,11 @@
             <tfoot>
                     <tr>
                         <td></td>
-                        <td><button>Adicionar</button></td>
+                        <td><a routerLink="/adicionarTrabalhador" routerLinkActive="active"><button>Adicionar</button></a></td>
                         <td></td>
                     </tr>
             </tfoot>
         </table>
     </div>
 </body>
+<router-outlet></router-outlet>
