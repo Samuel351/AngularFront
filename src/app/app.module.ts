@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { WorkersComponent } from './workers/workers.component';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { DepartamentComponent } from './departament/departament.component';
+import { DepartamentDetailComponent } from './departament-detail/departament-detail.component';
+import { WorkerDetailComponent } from './worker-detail/worker-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkersComponent,
-    DepartamentComponent
+    DepartamentComponent,
+    DepartamentDetailComponent,
+    WorkerDetailComponent
   ],
   imports: [
     BrowserModule,

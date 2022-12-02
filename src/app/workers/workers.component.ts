@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WorkerService } from './../worker.service';
+import { WorkerService } from '../service/worker.service';
 import { Component, OnInit } from '@angular/core';
 import { IWorker } from '../worker';
 
@@ -11,6 +11,7 @@ import { IWorker } from '../worker';
 })
 export class WorkersComponent implements OnInit {
       workers: IWorker[] = [];
+      title = "Funcionários"
 
       constructor(private workerService : WorkerService){}
 

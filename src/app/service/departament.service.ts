@@ -1,4 +1,4 @@
-import { IDepartament } from './departament';
+import { IDepartament } from '../departament';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

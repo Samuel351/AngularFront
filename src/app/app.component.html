@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Funcionários <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/worker" routerLinkActive="active">Funcionários <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Departamento</a>
+          <a class="nav-link" routerLink="/departament" routerLinkActive="active">Departamento</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="#">Minha conta</a>
@@ -19,5 +19,5 @@
       </ul>
     </div>
 </nav>
-  <app-workers></app-workers>
 </div>
+<router-outlet></router-outlet>

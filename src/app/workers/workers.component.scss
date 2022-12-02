@@ -9,7 +9,16 @@ body
     justify-content: center;
     align-items: center;
 }
+#table{
+    text-align: center;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
 
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
 
 .img{
     width: 300px;

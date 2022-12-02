@@ -1,20 +1,30 @@
+<br>
+<br>
 <body>
-    <h1>Departamentos</h1>
-    <table id="table">
+    <table id="table" class="table">
         <thead>
+            <caption>
+                Departamentos
+              </caption>
             <tr>
-                <td>Nome</td>
-                <td>Sigla</td>
-                <td>Ações</td>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody *ngFor="let departament of departaments">
             <tr>
-                <td>{{departament.nome}}</td>
-                <td>{{departament.sigla}}</td>
-                <td><button>Editar</button> <button>Deletar</button></td>
+                <td scope="row">{{departament.nome}}</td>
+                <td scope="row">{{departament.sigla}}</td>
+                <td scope="row"><a routerLink="/idDepartament" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td scope="row"><button class="btn btn-primary">Adicionar</button></td>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
-    <button>Adicionar</button>
 </body>
