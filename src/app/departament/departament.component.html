@@ -37,13 +37,32 @@
                 <td scope="row"><a routerLink="/idDepartament" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td scope="row"><a routerLink="/adicionarDepartamento" routerLinkActive="active"><button class="btn btn-primary">Adicionar</button></a></td>
-                <td></td>
-            </tr>
-        </tfoot>
     </table>
+    <a><button class="btn btn-primary" data-toggle="modal" data-target="#add">Adicionar</button></a>
 </body>
 <router-outlet></router-outlet>
+
+<!-- Modal add -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="addDepartament(addForm)">
+      <div class="modal-body">
+          <div class="row mt-2">
+              <div class="col-md-12 mb-3"><label class="labels">Nome do departamento</label><input type="text" class="form-control" ngModel name="nome" placeholder="Nome" required></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div><button class="btn btn-primary" [disabled]="addForm.invalid" type="submit">Adicionar</button></div>
+        <div><button class="btn btn-primary" type="reset" data-dismiss="modal">Cancelar</button></div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

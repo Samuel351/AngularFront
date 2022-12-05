@@ -9,9 +9,8 @@ import { DepartamentComponent } from './departament/departament.component';
 import { DepartamentDetailComponent } from './departament-detail/departament-detail.component';
 import { WorkerDetailComponent } from './worker-detail/worker-detail.component';
 import { LoginTelaComponent } from './login-tela/login-tela.component';
-import { WorkerFormComponent } from './worker-form/worker-form.component';
-import { DepartamentFormComponent } from './departament-form/departament-form.component';
 import { AccountComponent } from './account/account.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,14 +20,13 @@ import { AccountComponent } from './account/account.component';
     DepartamentDetailComponent,
     WorkerDetailComponent,
     LoginTelaComponent,
-    WorkerFormComponent,
-    DepartamentFormComponent,
-    AccountComponent
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

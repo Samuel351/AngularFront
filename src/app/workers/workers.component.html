@@ -1,4 +1,4 @@
-<body>
+<body id="body-page">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">My Company</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,29 +26,62 @@
                     Funcionários
                   </caption>
                 <tr>
+                    <th></th>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>RG</th>
+                    <th>Departamento</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody *ngFor="let worker of workers">
                 <tr>
-                  <td><img src={{worker.foto}}></td>
-                    <td scope="row">{{worker.nome}}</td>
-                    <td scope="row">{{worker.email}}</td>
-                    <td scope="row">{{worker.rg}}</td>
-                    <td scope="row"><button class="btn btn-primary">Detalhes</button></td>
+                  <td><img src={{worker.foto}} alt="avatar" class="rounded mx-auto d-block" style="width: 130px;"></td>
+                  <td>{{worker.nome}}</td>
+                  <td>{{worker.email}}</td>
+                  <td>{{worker.departament.nome}}</td>
+                  <td><a routerLink="/idWorker" routerLinkActive="active"><button class="btn btn-info"> Detalhes</button></a></td>
                 </tr>
             </tbody>
-            <tfoot>
-                    <tr>
-                        <td></td>
-                        <td><a routerLink="/adicionarTrabalhador" routerLinkActive="active"><button>Adicionar</button></a></td>
-                        <td></td>
-                    </tr>
-            </tfoot>
         </table>
+        <hr>
+        <a><button class="btn btn-primary" data-toggle="modal" data-target="#add">Adicionar</button></a>
     </div>
 </body>
 <router-outlet></router-outlet>
+
+<!-- Modal add -->
+<!-- Pop-up que aparece na tela para cadastrar funcionário -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="addWorker(addForm)">
+      <div class="modal-body">
+          <div class="row mt-2">
+              <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel name="nome" class="form-control" placeholder="Nome completo" required></div>
+          </div>
+          <div class="mb-3"><label>Email</label><input type="email" class="form-control" ngModel name="email" placeholder="Email" required></div>
+          <div class="mb-3"><label>Senha do funcionário</label><input type="password" ngModel name="senha" class="form-control" placeholder="Senha" required></div>
+          <div class="mb-3"><label>RG</label><input type="text" ngModel name="rg" class="form-control" placeholder="RG" required></div>
+          <div class="mb-3"><label>Foto</label><input ngModel name="foto" type="text" class="form-control" placeholder="Imagem da web" required></div>
+          <div>
+              <label for="inputState">Departamento</label>
+              <select id="departament" class="form-control" required>
+                <option default>Escolha um departamento</option>
+                <option *ngFor="let departament of departaments" name="departament" ngModel [value]="departament">{{departament.nome}}</option>
+              </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div><button [disabled]="addForm.invalid" class="btn btn-primary" type="submit">Adicionar</button></div>
+        <div><button class="btn btn-primary" data-dismiss ="modal" type="reset">Cancelar</button></div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
