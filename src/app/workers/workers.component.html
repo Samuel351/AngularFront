@@ -71,14 +71,14 @@
           <div class="mb-3"><label>Foto</label><input ngModel name="foto" type="text" class="form-control" placeholder="Imagem da web" required></div>
           <div>
               <label for="inputState">Departamento</label>
-              <select id="departament" class="form-control" required>
+              <select id="departament" class="form-control" [(ngModel)]="val" name="departament"  required>
                 <option default>Escolha um departamento</option>
-                <option *ngFor="let departament of departaments" name="departament" ngModel [value]="departament">{{departament.nome}}</option>
+                <option *ngFor="let departament of departaments" name="departament" [ngValue]="departament">{{departament.nome}}</option>
               </select>
           </div>
       </div>
       <div class="modal-footer">
-        <div><button [disabled]="addForm.invalid" class="btn btn-primary" type="submit">Adicionar</button></div>
+        <div><button class="btn btn-primary" type="submit">Adicionar</button></div>
         <div><button class="btn btn-primary" data-dismiss ="modal" type="reset">Cancelar</button></div>
       </div>
     </form>

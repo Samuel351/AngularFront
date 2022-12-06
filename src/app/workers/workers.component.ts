@@ -16,9 +16,7 @@ import { NgForm } from '@angular/forms';
 export class WorkersComponent implements OnInit {
       workers: IWorker[] = [];
       departaments: IDepartament[] = [];
-      title = "Funcionários"
-      departament : any;
-      selected: number = 0;
+      val : any;
 
       constructor(private workerService : WorkerService, private departamentService : DepartamentService){}
 
@@ -42,7 +40,9 @@ export class WorkersComponent implements OnInit {
       }
 
       addWorker(form : NgForm): void{
-        this.workerService.addWorker(form.value).subscribe(() => { this.getWorkers()}, (error: HttpErrorResponse) => {alert(error.message)})
+        console.log(this.val)
+        console.log(form.value)
+        this.workerService.addWorker(form.value).subscribe(() => { this.getWorkers(), console.log(form.value)}, (error: HttpErrorResponse) => {alert(error.message)})
       }
 
   }
