@@ -20,7 +20,7 @@
         </div>
     </nav>
     <div>
-        <table id="table" class="table">
+        <table id="table" class="table align-middle ">
             <thead>
                 <caption>
                     Funcionários
@@ -39,7 +39,7 @@
                   <td>{{worker.nome}}</td>
                   <td>{{worker.email}}</td>
                   <td>{{worker.departament.nome}}</td>
-                  <td><a routerLink="/idWorker" routerLinkActive="active"><button class="btn btn-info"> Detalhes</button></a></td>
+                  <td><a routerLink="/worker/{{worker.id}}" routerLinkActive="active"><button class="btn btn-info"> Detalhes</button></a></td>
                 </tr>
             </tbody>
         </table>

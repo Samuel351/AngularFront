@@ -13,7 +13,7 @@ const routes: Routes = [
   {title: 'Trabalhadores', path: 'worker', component: WorkersComponent},
   {title: 'Departamentos', path: 'departament', component: DepartamentComponent},
   {title: 'Detalhes trabalhador', path: 'worker/:id', component: WorkerDetailComponent},
-  {title: 'Detalhes departamento', path: 'idDepartament', component: DepartamentDetailComponent},
+  {title: 'Detalhes departamento', path: 'departament/:id', component: DepartamentDetailComponent},
   {title: 'Conta', path: 'detalhesConta', component: AccountComponent}
 ];
 

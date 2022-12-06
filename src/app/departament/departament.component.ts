@@ -1,6 +1,6 @@
 import { NgForm } from '@angular/forms';
 import { DepartamentService } from '../service/departament.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { IDepartament } from '../models/departament';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./departament.component.scss']
 })
 export class DepartamentComponent implements OnInit {
+    @ViewChild('closemodal') closemodal: any;
     departaments: IDepartament[] = [];
     title = "Departamentos";
 
@@ -27,5 +28,6 @@ export class DepartamentComponent implements OnInit {
     // Colocar um interceptador
     addDepartament(form: NgForm): void{
       this.departamentService.addDepartament(form.value).subscribe((response: IDepartament) => { this.getDepartaments()}, (error: HttpErrorResponse) => {alert(error.message)})
+      this.closemodal.nativeElement.click()
     }
 }

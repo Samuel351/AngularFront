@@ -34,7 +34,7 @@
             <tr>
                 <td scope="row">{{departament.nome}}</td>
                 <td scope="row">{{departament.sigla}}</td>
-                <td scope="row"><a routerLink="/idDepartament" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
+                <td scope="row"><a routerLink="/departament/{{departament.id}}" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
             </tr>
         </tbody>
     </table>
@@ -60,7 +60,7 @@
       </div>
       <div class="modal-footer">
         <div><button class="btn btn-primary" [disabled]="addForm.invalid" type="submit">Adicionar</button></div>
-        <div><button class="btn btn-primary" type="reset" data-dismiss="modal">Cancelar</button></div>
+        <div><button class="btn btn-primary" type="reset" data-dismiss="modal" #closemodal>Cancelar</button></div>
       </div>
     </form>
     </div>

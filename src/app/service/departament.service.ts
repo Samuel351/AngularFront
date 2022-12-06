@@ -1,4 +1,4 @@
-import { IDepartament } from '../models/departament';
+import { IDepartament } from './../models/departament';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservableLike } from 'rxjs';
@@ -11,7 +11,6 @@ export class DepartamentService {
   private url = "http://localhost:8080/departament";
   private username = "admin@gmail.com";
   private password = "admin";
-  private id = 1;
   headers = new HttpHeaders();
   header = this.headers.set('Access-Control-Allow-Origin', '*').append('Authorization', 'Basic ' + window.btoa(this.username + ':' + this.password));
 
@@ -21,11 +20,19 @@ export class DepartamentService {
     return this.http.get<IDepartament[]>(this.url, {'headers' : this.header})
   };
 
-  getDepartament(): Observable<IDepartament> {
-    return this.http.get<IDepartament>(this.url+'/'+this.id, {'headers' : this.header})
+  getDepartament(id: number): Observable<IDepartament> {
+    return this.http.get<IDepartament>(this.url+'/'+id, {'headers' : this.header})
   };
 
   addDepartament(departament: IDepartament): Observable<IDepartament>{
     return this.http.post<IDepartament>(this.url, departament, {'headers' : this.header})
+  }
+
+  editDepartament(departament: IDepartament): Observable<IDepartament>{
+    return this.http.put<IDepartament>(this.url+'/'+departament.id, departament, {'headers' : this.header})
+  }
+
+  delDepartament(id: number): Observable<IDepartament>{
+    return this.http.delete<IDepartament>(this.url+'/'+id, {'headers' : this.header});
   }
 }

@@ -1,57 +1,75 @@
-<br>
-<br>
-<div class="container">
-    <h1>Detalhes do departamento</h1>
-    <section class="member-details">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-8">
-                    <div class="member_designation">
-                        <h2>Mark Smitherbrow</h2>
-                        <span>CEO Bootdey</span>
-                    </div>
-                    <div class="member_desc">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt.ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="member_contact">
-                            <div class="row">
-                                <div class="col-lg-4  mb-3 mb-lg-0">
-                                    <div class="media-box">
-                                        <div class="media-icon">
-                                            <i class="fa fa-tablet" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="media-content">
-                                            <h5>Phone</h5>
-                                            <p><a href="callto">(+1) 251-235-3256</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center col-mt-4  mb-3 mb-mt-0">
-                                    <div class="media-box">
-                                        <div class="media-icon">
-                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="media-content">
-                                            <h5>Email</h5>
-                                            <p><a href="mailto">info@example.com</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center">
-                        <div class="col-mt-2">
-                            <button>Editar</button>
-                            <button>Deletar</button>
-                        </div>
-                    </div>
-                </div>
+<div class="text-center align-items-center">
+    <h1>{{departament.nome}}</h1>
+        <table class="table bg-white text-center">
+            <thead class="bg-light">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let worker of departament.workers">
+            <tr>
+                <td><p>{{worker.nome}}</p></td>
+                <td><p>{{worker.email}}</p></td>
+            </tr>
+            </tbody>
+        </table>
 
-            </div>
+        <div class="text-center">
+          <div>
+              <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#del">Deletar</button></a>
+              <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#edit">Editar</button></a>
+          </div>
         </div>
-    </section>
 </div>
+
+<!-- Modal del -->
+<div class="modal" tabindex="-1" id="del" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Deletar funcionário</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Você tem certeza? Todos os funcionários atribuidos a esse departamento serão excluídos</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="delDepartament(departament.id)">Deletar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" #closemodal1>Cancelar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- Modal edit -->
+<div [hidden]="isModelOpen" class="modal" id="edit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #editForm="ngForm" (ngSubmit)="editDepartament(editForm.value)">
+        <div class="modal-body">
+          <input type="hidden" name="id" ngModel="{{departament.id}}">
+            <div class="row mt-2">
+                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel="{{departament.nome}}" name="nome" class="form-control" placeholder="Nome completo" required></div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12 mb-3"><label class="labels">Sigla</label><input type="text" ngModel="{{departament.sigla}}" name="sigla" class="form-control" placeholder="Nome completo" required></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div><button [disabled]="editForm.invalid" class="btn btn-primary" type="submit">Salvar</button></div>
+          <div><button class="btn btn-primary" data-dismiss ="modal" type="reset" #closemodal2>Cancelar</button></div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

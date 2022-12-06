@@ -11,7 +11,6 @@ export class WorkerService {
   private url = "http://localhost:8080/worker";
   private username = "admin@gmail.com";
   private password = "admin";
-  private id = 1;
   headers = new HttpHeaders();
   header = this.headers.set('Access-Control-Allow-Origin', '*').append('Authorization', 'Basic ' + window.btoa(this.username + ':' + this.password));
 

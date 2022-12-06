@@ -1,8 +1,9 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { IDepartament } from './../models/departament';
 import { DepartamentService } from './../service/departament.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { WorkerService } from '../service/worker.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IWorker } from '../models/worker';
 import { NgForm } from '@angular/forms';
 
@@ -19,16 +20,15 @@ export class WorkersComponent implements OnInit {
       departament : any;
       selected: number = 0;
 
-      onSelected(){
-        this.departament.Id = this.selected;
-        console.log(this.departament);
-      }
-
       constructor(private workerService : WorkerService, private departamentService : DepartamentService){}
 
       ngOnInit(): void {
         this.getWorkers();
         this.DropdownDepartaments();
+      }
+
+      change(){
+        this.getWorkers();
       }
 
       getWorkers(): void {
@@ -42,8 +42,7 @@ export class WorkersComponent implements OnInit {
       }
 
       addWorker(form : NgForm): void{
-        form.value.departament.id = this.departament.id;
-        this.workerService.addWorker(form.value).subscribe((response: IWorker) => { console.log(response), console.log(response.departament)}, (error: HttpErrorResponse) => {alert(error.message)})
+        this.workerService.addWorker(form.value).subscribe(() => { this.getWorkers()}, (error: HttpErrorResponse) => {alert(error.message)})
       }
 
   }
