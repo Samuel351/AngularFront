@@ -3,9 +3,9 @@ import { IDepartament } from './../models/departament';
 import { DepartamentService } from './../service/departament.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { WorkerService } from '../service/worker.service';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { IWorker } from '../models/worker';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-workers',
@@ -14,6 +14,7 @@ import { NgForm } from '@angular/forms';
   providers: []
 })
 export class WorkersComponent implements OnInit {
+      @ViewChild('closemodal') closemodal: any;
       workers: IWorker[] = [];
       departaments: IDepartament[] = [];
       val : any;
@@ -23,10 +24,6 @@ export class WorkersComponent implements OnInit {
       ngOnInit(): void {
         this.getWorkers();
         this.DropdownDepartaments();
-      }
-
-      change(){
-        this.getWorkers();
       }
 
       getWorkers(): void {
@@ -42,7 +39,7 @@ export class WorkersComponent implements OnInit {
       addWorker(form : NgForm): void{
         console.log(this.val)
         console.log(form.value)
-        this.workerService.addWorker(form.value).subscribe(() => { this.getWorkers(), console.log(form.value)}, (error: HttpErrorResponse) => {alert(error.message)})
+        this.workerService.addWorker(form.value).subscribe(() => { this.getWorkers()}, (error: HttpErrorResponse) => {alert(error.error)})
+        this.closemodal.nativeElement.click();
       }
-
-  }
+}

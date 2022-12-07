@@ -16,7 +16,6 @@ export class DepartamentDetailComponent implements OnInit{
   title = "Detalhes do departamento"
   departamentID: any;
   departament: any;
-  workers: IWorker[] = [];
   isModelOpen = false;
 
   constructor(private departamentService : DepartamentService ,private activatedRoute: ActivatedRoute, private router: Router) {}
@@ -41,4 +40,5 @@ export class DepartamentDetailComponent implements OnInit{
     .subscribe(() => {this.router.navigate(['/departament'])});
     this.closemodal2.nativeElement.click();
   }
+
 }

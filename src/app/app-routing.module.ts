@@ -6,6 +6,7 @@ import { WorkersComponent } from './workers/workers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   {title: 'Departamentos', path: 'departament', component: DepartamentComponent},
   {title: 'Detalhes trabalhador', path: 'worker/:id', component: WorkerDetailComponent},
   {title: 'Detalhes departamento', path: 'departament/:id', component: DepartamentDetailComponent},
-  {title: 'Conta', path: 'detalhesConta', component: AccountComponent}
+  {title: 'Conta', path: 'detalhesConta', component: AccountComponent},
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
 
 @NgModule({

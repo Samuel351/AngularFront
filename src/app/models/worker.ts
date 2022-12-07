@@ -6,5 +6,4 @@ export interface IWorker{
     rg: string;
     foto: string;
     departament: IDepartament;
-
 }
