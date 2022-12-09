@@ -1,84 +1,95 @@
-
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/worker" routerLinkActive="active">Voltar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+<br>
 <div class="container">
-      <div class="row">
-          <div class="col-lg-12 mb-4 mb-sm-5">
-              <div class="row align-items-center">
-                  <div class="col-lg-6 mb-4 mb-lg-0">
-                      <img src={{worker.foto}} alt="...">
-                  </div>
-              <div class="col-lg-6 px-xl-10">
-                      <h3 class="h2 text-black mb-0">{{worker.nome}}</h3>
-                  <ul class="list-unstyled mb-1-9">
-                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Departamento:</span> {{worker.departament.nome}}</li>
-                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> {{worker.email}}</li>
-                      <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">RG:</span> {{worker.rg | mask: '00.000.000-0'}}</li>
-                  </ul>
+  <div class="row">
+      <div class="col-lg-12 mb-4 mb-sm-5">
+          <div class="row align-items-center">
+              <div class="col-lg-6 mb-4 mb-lg-0">
+                  <img src={{worker.foto}} alt="...">
               </div>
+          <div class="col-lg-6 px-xl-10">
+                  <h3 class="h2 text-black mb-0">{{worker.nome}}</h3>
+              <ul class="list-unstyled mb-1-9">
+                  <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Departamento:</span> {{worker.departament.nome}}</li>
+                  <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> {{worker.email}}</li>
+                  <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">RG:</span> {{worker.rg | mask: '00.000.000-0'}}</li>
+              </ul>
           </div>
       </div>
   </div>
-  <div class="text-center">
-      <div>
-          <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#del">Deletar</button></a>
-          <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#edit">Editar</button></a>
-      </div>
+</div>
+<div class="text-center">
+  <div>
+      <a><button class="btn btn-danger col-lg-1" data-toggle="modal" data-target="#del">Deletar</button></a>
+      <a><button class="btn btn-secondary col-lg-1" data-toggle="modal" data-target="#edit">Editar</button></a>
   </div>
+</div>
 </div>
 
 
 <!-- Modal del -->
 <div class="modal" tabindex="-1" id="del" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Deletar funcionário</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Você tem certeza?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="deleteWorker(worker.id)">Deletar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" #closemodal1>Cancelar</button>
-        </div>
-      </div>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Deletar funcionário</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+    <div class="modal-body">
+      <p>Você tem certeza?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="deleteWorker(worker.id)">Deletar</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" #closemodal1>Cancelar</button>
+    </div>
+  </div>
+</div>
 </div>
 
 
 <!-- Modal edit -->
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form #editForm="ngForm" (ngSubmit)="editWorker(editForm.value)">
+    <div class="modal-body">
+      <input type="hidden" name=id ngModel="{{worker.id}}">
+        <div class="row mt-2">
+            <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel="{{worker.nome}}" name="nome" class="form-control" placeholder="Nome completo" required></div>
         </div>
-        <form #editForm="ngForm" (ngSubmit)="editWorker(editForm.value)">
-        <div class="modal-body">
-          <input type="hidden" name=id ngModel="{{worker.id}}">
-            <div class="row mt-2">
-                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel="{{worker.nome}}" name="nome" class="form-control" placeholder="Nome completo" required></div>
-            </div>
-            <div class="mb-3"><label>Email</label><input type="email" class="form-control" ngModel="{{worker.email}}" name="email" placeholder="Email" required></div>
-            <div class="mb-3"><label>RG</label><input type="text" ngModel="{{worker.rg}}" name="rg" class="form-control" placeholder="RG" required></div>
-            <div class="mb-3"><label>Foto</label><input ngModel="{{worker.foto}}" name="foto" type="text" class="form-control" placeholder="Imagem da web" required></div>
-            <div>
-              <label for="inputState">Departamento</label>
-              <select id="departament" class="form-control" [(ngModel)]="val" name="departament" required>
-                <option *ngFor="let departament of departaments" name="departament" [ngValue]="departament">{{departament.nome}}</option>
-              </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div><button [disabled]="editForm.invalid" class="btn btn-primary" type="submit">Salvar</button></div>
-          <div><button class="btn btn-primary" data-dismiss ="modal" type="reset" #closemodal2>Cancelar</button></div>
-        </div>
-      </form>
+        <div class="mb-3"><label>Email</label><input type="email" class="form-control" ngModel="{{worker.email}}" name="email" placeholder="Email" required></div>
+        <div class="mb-3"><label>RG</label><input type="text" ngModel="{{worker.rg}}" name="rg" class="form-control" placeholder="RG" required></div>
+        <div class="mb-3"><label>Foto</label><input ngModel="{{worker.foto}}" name="foto" type="text" class="form-control" placeholder="Imagem da web" required></div>
+        <div>
+          <label for="inputState">Departamento</label>
+          <select id="departament" class="form-control" [(ngModel)]="val" name="departament" required>
+            <option *ngFor="let departament of departaments" name="departament" [ngValue]="departament">{{departament.nome}}</option>
+          </select>
       </div>
     </div>
+    <div class="modal-footer">
+      <div><button [disabled]="editForm.invalid" class="btn btn-primary" type="submit">Salvar</button></div>
+      <div><button class="btn btn-primary" data-dismiss ="modal" type="reset" #closemodal2>Cancelar</button></div>
+    </div>
+  </form>
   </div>
+</div>
+</div>

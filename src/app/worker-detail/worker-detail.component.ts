@@ -1,9 +1,9 @@
+import { IDepartament } from './../models/departament';
 import { IWorker } from './../models/worker';
 import { Component, ElementRef, OnInit, ViewChild, ɵdevModeEqual } from '@angular/core';
 import { DepartamentService } from '../service/departament.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { WorkerService } from '../service/worker.service';
-import { IDepartament } from '../models/departament';
 
 @Component({
   selector: 'app-worker-detail',
@@ -15,11 +15,14 @@ export class WorkerDetailComponent implements OnInit {
   @ViewChild('closemodal2') closemodal2: any;
   title = "Detalhes do funcionário"
   departaments: IDepartament[] = [];
+  departament: any;
   workerID: any;
   worker: any;
   val : any;
 
-  constructor(private workerService : WorkerService, private activatedRoute: ActivatedRoute, private departamentService: DepartamentService, private router: Router){}
+  constructor(private workerService : WorkerService, private activatedRoute: ActivatedRoute, private departamentService: DepartamentService, private router: Router){
+
+  }
 
   ngOnInit(): void {
     this.workerID = this.activatedRoute.snapshot.paramMap.get('id');
@@ -47,6 +50,5 @@ export class WorkerDetailComponent implements OnInit {
     this.departamentService.getDepartaments()
     .subscribe(departaments => this.departaments = departaments);
   }
+
 }
-
-

@@ -1,9 +1,4 @@
-export class ILogin {      
+export interface ILogin {      
     email: string;    
     senha: string;   
-    
-    constructor(email: string, senha: string){
-        this.email = email;
-        this.senha = senha;
-    }
 }  

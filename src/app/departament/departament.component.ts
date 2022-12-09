@@ -17,7 +17,7 @@ export class DepartamentComponent implements OnInit {
     constructor(private departamentService: DepartamentService){}
 
     ngOnInit() : void{
-      this.getDepartaments();
+      this.getDepartaments()
     }
 
     getDepartaments(): void{
@@ -27,7 +27,7 @@ export class DepartamentComponent implements OnInit {
 
     // Colocar um interceptador
     addDepartament(form: NgForm): void{
-      this.departamentService.addDepartament(form.value).subscribe((response: IDepartament) => { this.getDepartaments()}, (error: HttpErrorResponse) => {alert(error.message)})
+      this.departamentService.addDepartament(form.value).subscribe(() => this.getDepartaments())
       this.closemodal.nativeElement.click()
     }
 }

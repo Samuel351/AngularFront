@@ -16,13 +16,18 @@ export class DepartamentDetailComponent implements OnInit{
   title = "Detalhes do departamento"
   departamentID: any;
   departament: any;
-  isModelOpen = false;
+  isEmpty = false;
 
   constructor(private departamentService : DepartamentService ,private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.departamentID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getDepartament(this.departamentID);
+    if(this.departament.workers.length > 0){
+      this.isEmpty = false;
+    }else{
+      this.isEmpty = true;
+    }
   }
 
   getDepartament(id: number): void {
@@ -31,13 +36,13 @@ export class DepartamentDetailComponent implements OnInit{
   }
 
   delDepartament(id : number): void{
-    this.departamentService.delDepartament(id).subscribe(() => {this.router.navigate(['/departament'])});
+    this.departamentService.delDepartament(id).subscribe();
+    this.router.navigate(['/departament']);
     this.closemodal1.nativeElement.click();
   }
 
   editDepartament(departament : IDepartament){
-    this.departamentService.editDepartament(departament)
-    .subscribe(() => {this.router.navigate(['/departament'])});
+    this.departamentService.editDepartament(departament).subscribe(() => this.getDepartament(departament.id));
     this.closemodal2.nativeElement.click();
   }
 

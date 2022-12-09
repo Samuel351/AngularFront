@@ -22,13 +22,13 @@ export class DepartamentService {
 
   addDepartament(departament: IDepartament): Observable<IDepartament>{
     return this.http.post<IDepartament>(this.url, departament)
-  }
+  };
 
   editDepartament(departament: IDepartament): Observable<IDepartament>{
     return this.http.put<IDepartament>(this.url+'/'+departament.id, departament)
-  }
+  };
 
   delDepartament(id: number): Observable<IDepartament>{
     return this.http.delete<IDepartament>(this.url+'/'+id);
-  }
+  };
 }

@@ -1,5 +1,17 @@
-<div class="text-center align-items-center">
-    <h1>{{departament.nome}}</h1>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/departament" routerLinkActive="active">Voltar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<h1 class="text-center align-items-center">{{departament.nome}}</h1>
+<div class="text-center align-items-center" *ngIf="departament.workers?.length > 0; else empty">
         <table class="table bg-white text-center">
             <thead class="bg-light">
             <tr>
@@ -7,7 +19,7 @@
                 <th>Email</th>
             </tr>
             </thead>
-            <tbody *ngFor="let worker of departament.workers">
+            <tbody  *ngFor="let worker of departament.workers">
             <tr>
                 <td><p>{{worker.nome}}</p></td>
                 <td><p>{{worker.email}}</p></td>
@@ -17,14 +29,24 @@
 
         <div class="text-center">
           <div>
-              <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#del">Deletar</button></a>
-              <a><button class="btn btn-primary col-lg-2" data-toggle="modal" data-target="#edit">Editar</button></a>
+              <a><button class="btn btn-danger col-lg-1" data-toggle="modal" data-target="#del">Deletar</button></a>
+              <a><button class="btn btn-secondary col-lg-1" data-toggle="modal" data-target="#edit">Editar</button></a>
           </div>
         </div>
 </div>
 
+<ng-template #empty>
+  <h3 class="text-center align-items-center">Não há trabalhadores nesse departamento</h3>
+  <div class="text-center">
+    <div>
+        <a><button class="btn btn-danger col-lg-1" data-toggle="modal" data-target="#del">Deletar</button></a>
+        <a><button class="btn btn-secondary col-lg-1" data-toggle="modal" data-target="#edit">Editar</button></a>
+    </div>
+  </div>
+</ng-template>
+
 <!-- Modal del -->
-<div class="modal" tabindex="-1" id="del" role="dialog">
+<div class="modal" id="del">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -46,7 +68,7 @@
 
 
 <!-- Modal edit -->
-<div [hidden]="isModelOpen" class="modal" id="edit" tabindex="-1" role="dialog">
+<div class="modal" id="edit">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

@@ -1,4 +1,3 @@
-import { LoginFormService } from './service/login-form.service';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -8,39 +7,56 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class IntercepInterceptor implements HttpInterceptor {
 
-  private username = "admin@gmail.com";
-  private password = "admin";
+  private authUrl = "http://localhost:8080/user"
+  private username = "ceo@gmail.com";
+  private password = "ceo";
   headers = new HttpHeaders();
   header = this.headers.set('Authorization', 'Basic ' + window.btoa(this.username + ':' + this.password));
 
-  constructor(private router: Router, private loginService: LoginFormService) {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    if(request.url == this.authUrl){
+      return next.handle(request).pipe(
+        catchError((err: HttpErrorResponse) => {
+          if(err.status == 404)
+          {
+            console.log(err.error)
+            this.router.navigate(['/**'])
+          }
+          return EMPTY;
+        })
+      );
+    }
+
     const newRequest = request.clone({
       'headers': this.header
-
     });
-    console.log(request)
-    console.log(newRequest)
 
     return next.handle(newRequest).pipe(
       catchError((err: HttpErrorResponse) => {
         if(err.status == 404)
         {
+          console.log(err.error)
           this.router.navigate(['/**'])
         }
         else if(err.status == 406)
         {
           err.error.forEach((element: any) => {
+            console.log(element.message)
             alert(element.message)
           });
+        }
+        else if(err.status == 409)
+        {
+            alert(err.error.message)
         }
         else if(err.status == 401)
         {
@@ -50,11 +66,7 @@ export class IntercepInterceptor implements HttpInterceptor {
         else if(err.status == 500){
           alert("Erro interno no servidor!")
         }
-        else{
-          console.log(err.error)
-        }
-
-        return throwError(() => new Error(err.error));
+        return EMPTY;
       })
     );
   }

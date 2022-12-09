@@ -1,0 +1,20 @@
+<body class="text-center">
+    <form #validateForm="ngForm" (ngSubmit)="validateData(validateForm)">
+       <h1 class="h3 mb-5 font-weight-normal">Login</h1>
+    
+    <div>
+        <div>
+            <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="email" name="email" class="col-lg-2 mb-3" required>
+        </div>
+         
+        <div>
+            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="senha" name="senha" class="col-lg-2" required>
+        </div>
+    </div>
+
+    <br>
+
+      <button class="btn btn-lg btn-primary col-lg-2" type="submit">Entrar</button>
+      <p class="mt-5 mb-3 text-muted">© Samuel systems</p>
+    </form> 
+</body>

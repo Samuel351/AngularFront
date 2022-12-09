@@ -1,7 +1,6 @@
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, ObservableLike, throwError, catchError } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { IWorker } from '../models/worker';
 
 @Injectable({
@@ -9,9 +8,9 @@ import { IWorker } from '../models/worker';
 })
 export class WorkerService {
 
-  private url = "http://localhost:8080/worker";
+  readonly url = "http://localhost:8080/worker";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   getWorkers(): Observable<IWorker[]> {
     return this.http.get<IWorker[]>(this.url)
@@ -27,10 +26,10 @@ export class WorkerService {
 
   editWorker(worker: IWorker): Observable<IWorker>{
     return this.http.put<IWorker>(this.url+'/'+worker.id, worker)
-  }
+  };
 
   delWorker(id: number) : Observable<IWorker>{
     return this.http.delete<IWorker>(this.url+'/'+id)
-  }
+  };
 
 }
