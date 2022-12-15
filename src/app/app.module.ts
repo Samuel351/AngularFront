@@ -12,9 +12,10 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { IntercepInterceptor } from './intercep.interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
-import { FormComponent } from './form/form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { HomeComponent } from './home/home.component';
+import { ImagemComponent } from './imagem/imagem.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { AuthGuardService } from './guards/auth-guard.service';
     WorkerDetailComponent,
     PageNotFoundComponent,
     LoginComponent,
-    FormComponent,
     NavbarComponent,
+    HomeComponent,
+    ImagemComponent,
   ],
   imports: [
     BrowserModule,

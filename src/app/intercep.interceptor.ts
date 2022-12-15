@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class IntercepInterceptor implements HttpInterceptor {
 
   private authUrl = "http://localhost:8080/user"
+  private workerUrl = "http://localhost:8080/worker"
   private username = "ceo@gmail.com";
   private password = "ceo";
   headers = new HttpHeaders();
@@ -23,13 +24,35 @@ export class IntercepInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    // Request de autorização
     if(request.url == this.authUrl){
       return next.handle(request).pipe(
         catchError((err: HttpErrorResponse) => {
-          if(err.status == 404)
-          {
+          if(err.status == 500){
+            alert("Erro interno no servidor!")
+          }
+          else{
             console.log(err.error)
-            this.router.navigate(['/**'])
+          }
+          return EMPTY;
+        })
+      );
+    }
+
+    if(request.url == this.workerUrl){
+      this.header.append('Content-Type', 'multipart/form-data');
+
+      const newRequest = request.clone({
+        'headers': this.header
+      });
+
+      return next.handle(newRequest).pipe(
+        catchError((err: HttpErrorResponse) => {
+          if(err.status == 500){
+            alert("Erro interno no servidor!")
+          }
+          else{
+            console.log(err.error)
           }
           return EMPTY;
         })
@@ -40,6 +63,7 @@ export class IntercepInterceptor implements HttpInterceptor {
       'headers': this.header
     });
 
+    // Requests de requisitar e enviar dados
     return next.handle(newRequest).pipe(
       catchError((err: HttpErrorResponse) => {
         if(err.status == 404)
@@ -66,6 +90,9 @@ export class IntercepInterceptor implements HttpInterceptor {
         else if(err.status == 500){
           alert("Erro interno no servidor!")
         }
+
+        alert(err.message)
+
         return EMPTY;
       })
     );

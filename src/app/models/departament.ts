@@ -1,6 +1,6 @@
 export interface IDepartament{
     id: number;
-    nome: string;
+    name: string;
     sigla: string;
 
 }

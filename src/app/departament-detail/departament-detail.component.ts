@@ -37,7 +37,7 @@ export class DepartamentDetailComponent implements OnInit{
 
   delDepartament(id : number): void{
     this.departamentService.delDepartament(id).subscribe();
-    this.router.navigate(['/departament']);
+    this.router.navigate(['/home/departament']);
     this.closemodal1.nativeElement.click();
   }
 

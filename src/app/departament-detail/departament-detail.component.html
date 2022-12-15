@@ -2,7 +2,7 @@
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/departament" routerLinkActive="active">Voltar</a>
+        <a class="nav-link" routerLink="/home/departament" routerLinkActive="active">Voltar</a>
       </li>
     </ul>
   </div>
@@ -10,7 +10,7 @@
 <br>
 <br>
 <br>
-<h1 class="text-center align-items-center">{{departament.nome}}</h1>
+<h1 class="text-center align-items-center">{{departament.name}}</h1>
 <div class="text-center align-items-center" *ngIf="departament.workers?.length > 0; else empty">
         <table class="table bg-white text-center">
             <thead class="bg-light">
@@ -19,9 +19,9 @@
                 <th>Email</th>
             </tr>
             </thead>
-            <tbody  *ngFor="let worker of departament.workers">
-            <tr>
-                <td><p>{{worker.nome}}</p></td>
+            <tbody >
+            <tr *ngFor="let worker of departament.workers">
+                <td><p>{{worker.name}}</p></td>
                 <td><p>{{worker.email}}</p></td>
             </tr>
             </tbody>
@@ -81,7 +81,7 @@
         <div class="modal-body">
           <input type="hidden" name="id" ngModel="{{departament.id}}">
             <div class="row mt-2">
-                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel="{{departament.nome}}" name="nome" class="form-control" placeholder="Nome completo" required></div>
+                <div class="col-md-12 mb-3"><label class="labels">Nome do departamento</label><input type="text" ngModel="{{departament.name}}" name="name" class="form-control" placeholder="Nome completo" required></div>
             </div>
             <div class="row mt-2">
               <div class="col-md-12 mb-3"><label class="labels">Sigla</label><input type="text" ngModel="{{departament.sigla}}" name="sigla" class="form-control" placeholder="Nome completo" required></div>

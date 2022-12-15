@@ -1,9 +1,9 @@
 import { IDepartament } from './departament';
 export interface IWorker{
     id: number;
-    nome: string;
+    name: string;
     email: string;
     rg: string;
-    foto: string;
+    photo: any;
     departament: IDepartament;
 }

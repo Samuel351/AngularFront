@@ -2,11 +2,13 @@
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/worker" routerLinkActive="active">Voltar</a>
+        <a class="nav-link" routerLink="/home/worker" routerLinkActive="active">Voltar</a>
       </li>
     </ul>
   </div>
 </nav>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -15,12 +17,14 @@
       <div class="col-lg-12 mb-4 mb-sm-5">
           <div class="row align-items-center">
               <div class="col-lg-6 mb-4 mb-lg-0">
-                  <img src={{worker.foto}} alt="...">
+                <!-- <img src="{{'data:image/png;base64,'+worker.photo}}" alt="">  imagem do banco de dados -->
+                <img src="http://127.0.0.1:8081/fotos/{{worker.photo.name}}" alt=""> <!-- imagem do sistema de arquivos -->
+                  <p><a data-toggle="modal" data-target="#photo">Editar foto</a></p>
               </div>
           <div class="col-lg-6 px-xl-10">
-                  <h3 class="h2 text-black mb-0">{{worker.nome}}</h3>
+                  <h3>{{worker.nome}}</h3>
               <ul class="list-unstyled mb-1-9">
-                  <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Departamento:</span> {{worker.departament.nome}}</li>
+                  <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Departamento:</span> {{worker.departament.name}}</li>
                   <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> {{worker.email}}</li>
                   <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">RG:</span> {{worker.rg | mask: '00.000.000-0'}}</li>
               </ul>
@@ -36,8 +40,7 @@
 </div>
 </div>
 
-
-<!-- Modal del -->
+<!-- Pop-up para deletar funcionário -->
 <div class="modal" tabindex="-1" id="del" role="dialog">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -59,12 +62,12 @@
 </div>
 
 
-<!-- Modal edit -->
+<!-- Pop-up para editar funcionário -->
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+      <h5 class="modal-title" id="exampleModalLabel">Editar funcionário</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -73,15 +76,18 @@
     <div class="modal-body">
       <input type="hidden" name=id ngModel="{{worker.id}}">
         <div class="row mt-2">
-            <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel="{{worker.nome}}" name="nome" class="form-control" placeholder="Nome completo" required></div>
+            <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel={{worker.name}} name="name" class="form-control" placeholder="Nome completo" required></div>
         </div>
         <div class="mb-3"><label>Email</label><input type="email" class="form-control" ngModel="{{worker.email}}" name="email" placeholder="Email" required></div>
         <div class="mb-3"><label>RG</label><input type="text" ngModel="{{worker.rg}}" name="rg" class="form-control" placeholder="RG" required></div>
-        <div class="mb-3"><label>Foto</label><input ngModel="{{worker.foto}}" name="foto" type="text" class="form-control" placeholder="Imagem da web" required></div>
+        <div class="mb-3"><input ngModel="{{worker.photo}}" name="file" type="file" class="form-control" placeholder="Imagem da web" (change)="onFileSelected($event)">
+        <img src="{{imageUrl}}" alt="" srcset="">
+        </div>
         <div>
+          <caption>{{worker.departament.name}}</caption>
           <label for="inputState">Departamento</label>
           <select id="departament" class="form-control" [(ngModel)]="val" name="departament" required>
-            <option *ngFor="let departament of departaments" name="departament" [ngValue]="departament">{{departament.nome}}</option>
+            <option *ngFor="let departament of departaments$ | async" name="departament" [ngValue]="departament">{{departament.name}}</option>
           </select>
       </div>
     </div>
@@ -93,3 +99,28 @@
   </div>
 </div>
 </div>
+
+<!-- Pop-up para adicionar e editar foto 
+<div class="modal fade" id="photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #editForm="ngForm" (ngSubmit)="editPhoto(editForm.value)">
+      <div class="modal-body">
+        <input type="hidden" name=id ngModel="{{worker.id}}">
+        <label>Foto</label><input ngModel="{{worker.photo}}" name="photo" type="file" accept="image/*" class="form-control" (change)="onFileSelected($event)" required>
+      </div>
+      <div class="modal-footer">
+        <div><button class="btn btn-primary" type="submit">Salvar</button></div>
+        <div><button class="btn btn-primary" data-dismiss ="modal" type="reset" #closemodal2>Cancelar</button></div>
+      </div>
+    </form>
+    </div>
+  </div>
+  </div> -->
+  

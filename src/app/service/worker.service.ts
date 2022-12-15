@@ -24,8 +24,16 @@ export class WorkerService {
     return this.http.post<IWorker>(this.url, worker)
   };
 
+  addWorkerForm(form: FormData): Observable<any>{
+    return this.http.post<any>(this.url, form)
+  };
+
   editWorker(worker: IWorker): Observable<IWorker>{
     return this.http.put<IWorker>(this.url+'/'+worker.id, worker)
+  };
+
+  editPhoto(worker: IWorker): Observable<IWorker>{
+    return this.http.patch<IWorker>(this.url+'/'+worker.id, worker)
   };
 
   delWorker(id: number) : Observable<IWorker>{

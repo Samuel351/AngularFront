@@ -1,8 +1,9 @@
 <body>
 <app-navbar></app-navbar>
-<br>
-<br>
 <div>
+  <br>
+  <br>
+  <br>
     <table id="table" class="table">
         <thead>
             <tr>
@@ -11,11 +12,11 @@
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody *ngFor="let departament of departaments">
-            <tr>
-                <td scope="row">{{departament.nome}}</td>
+        <tbody>
+            <tr *ngFor="let departament of departaments$ | async">
+                <td scope="row">{{departament.name}}</td>
                 <td scope="row">{{departament.sigla}}</td>
-                <td scope="row"><a routerLink="/departament/{{departament.id}}" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
+                <td scope="row"><a routerLink="/home/departament/{{departament.id}}" routerLinkActive="active"><button class="btn btn-info">Detalhes</button></a></td>
             </tr>
         </tbody>
     </table>
@@ -36,7 +37,7 @@
       <form #addForm="ngForm" (ngSubmit)="addDepartament(addForm)">
       <div class="modal-body">
           <div class="row mt-2">
-              <div class="col-md-12 mb-3"><label class="labels">Nome do departamento</label><input type="text" class="form-control" ngModel name="nome" placeholder="Nome" required></div>
+              <div class="col-md-12 mb-3"><label class="labels">Nome do departamento</label><input type="text" class="form-control" ngModel name="name" placeholder="Nome" required></div>
           </div>
       </div>
       <div class="modal-footer">

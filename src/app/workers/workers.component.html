@@ -1,5 +1,6 @@
 <body id="body-page">
     <app-navbar></app-navbar>
+    <br>
     <div>
         <table id="table" class="table align-middle">
             <thead>
@@ -14,13 +15,15 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let worker of workers$ | async">
-                <tr>
-                  <td><img src={{worker.foto}} alt="avatar" class="rounded mx-auto d-block" style="width: 130px;"></td>
-                  <td>{{worker.nome}}</td>
+            <tbody>
+                <!-- <img src="{{'data:image/png;base64,'+worker.photo}}" alt="">  imagem do banco de dados -->
+                <!-- <img src="http://127.0.0.1:8081/fotos/worker-photo.jpg" alt=""> imagem do sistema de arquivos -->
+                <tr *ngFor="let worker of workers$ | async"> 
+                  <td><img src="http://127.0.0.1:8081/fotos/{{worker.photo.name}}" alt=""></td>
+                  <td>{{worker.name}}</td>
                   <td>{{worker.email}}</td>
-                  <td>{{worker.departament.nome}}</td>
-                  <td><a routerLink="/worker/{{worker.id}}" routerLinkActive="active"><button class="btn btn-info"> Detalhes</button></a></td>
+                  <td>{{worker.departament.name}}</td>
+                  <td><a routerLink="/home/worker/{{worker.id}}" routerLinkActive="active"><button class="btn btn-info"> Detalhes</button></a></td>
                 </tr>
             </tbody>
         </table>
@@ -37,7 +40,7 @@
 <router-outlet></router-outlet>
 
 <!-- Modal add -->
-<!-- Pop-up que aparece na tela para cadastrar funcionário -->
+<!-- Pop-up que aparece na tela para cadastrar funcionário
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -50,20 +53,55 @@
       <form #addForm="ngForm" (ngSubmit)="addWorker(addForm)">
         <div class="modal-body">
             <div class="row mt-2">
-                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel name="nome" class="form-control" placeholder="Nome completo" required></div>
+                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" ngModel name="name" class="form-control" placeholder="Nome completo" required></div>
             </div>
             <div class="mb-3"><label>Email</label><input type="email" class="form-control" ngModel name="email" placeholder="Email" required></div>
             <div class="mb-3"><label>RG</label><input type="text" ngModel name="rg" class="form-control" placeholder="00.000.000-0" mask="00.000.000-0" required></div>
-            <div class="mb-3"><label>Foto</label><input ngModel name="foto" type="text" class="form-control" placeholder="Url da Imagem" required></div>
-            <div>
+            <div class="mb-3"><label>Foto</label><input ngModel name="photo" type="file" accept="image/*" class="form-control" (change)="onFileSelected($event)" placeholder="Url da Imagem"></div>
+            <div> 
               <label for="inputState">Departamento</label>
               <select id="departament" class="form-control" [(ngModel)]="val" name="departament"  required>
-                <option *ngFor="let departament of departaments$ | async" name="departament" [ngValue]="departament">{{departament.nome}}</option>
+                <option *ngFor="let departament of departaments$ | async" name="departament" [ngValue]="departament">{{departament.name}}</option>
               </select>
           </div>
         </div>
         <div class="modal-footer">
           <div><button class="btn btn-primary" [disabled]="addForm.invalid" type="submit">Adicionar</button></div>
+          <div><button class="btn btn-secondary" data-dismiss ="modal" type="reset" #closemodal>Cancelar</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  -->
+
+<!-- Modal add Reactive Forms -->
+<!-- Pop-up que aparece na tela para cadastrar funcionário -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar funcionário</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="formulario" (ngSubmit)="addWorkerForms()">
+        <div class="modal-body">
+            <div class="row mt-2">
+                <div class="col-md-12 mb-3"><label class="labels">Nome completo</label><input type="text" formControlName="name"  class="form-control" placeholder="Nome completo" required></div>
+            </div>
+            <div class="mb-3"><label>Email</label><input type="email" class="form-control" formControlName="email" placeholder="Email" required></div>
+            <div class="mb-3"><label>RG</label><input type="text" formControlName="rg"  name="rg" class="form-control" placeholder="00.000.000-0" mask="00.000.000-0" required></div>
+            <div class="mb-3"><label>Foto</label><input type="file" accept="image/*" class="form-control" (change)="onFileSelected($event)" placeholder="Url da Imagem"></div>
+            <div> 
+              <label for="inputState">Departamento</label>
+              <select id="departament" class="form-control" [(ngModel)]="val" formControlName="departament" required>
+                <option *ngFor="let departament of departaments$ | async" formControlName="departament" [ngValue]="departament">{{departament.name}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div><button class="btn btn-primary" [disabled]="formulario.invalid" type="submit">Adicionar</button></div>
           <div><button class="btn btn-secondary" data-dismiss ="modal" type="reset" #closemodal>Cancelar</button></div>
         </div>
       </form>

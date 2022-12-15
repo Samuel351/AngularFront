@@ -3,6 +3,7 @@ import { DepartamentService } from '../service/departament.service';
 import { Component, OnInit, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { IDepartament } from '../models/departament';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-departament',
@@ -11,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DepartamentComponent implements OnInit {
     @ViewChild('closemodal') closemodal: any;
-    departaments: IDepartament[] = [];
+    departaments$: Observable<IDepartament[]> = new Observable;
     title = "Departamentos";
 
     constructor(private departamentService: DepartamentService){}
@@ -21,11 +22,9 @@ export class DepartamentComponent implements OnInit {
     }
 
     getDepartaments(): void{
-      this.departamentService.getDepartaments()
-      .subscribe(departaments => this.departaments = departaments)
+      this.departaments$ = this.departamentService.getDepartaments()
     }
 
-    // Colocar um interceptador
     addDepartament(form: NgForm): void{
       this.departamentService.addDepartament(form.value).subscribe(() => this.getDepartaments())
       this.closemodal.nativeElement.click()

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   email : any;
-  senha: any;
+  password: any;
   userExists = false;
   
   constructor(private loginService : LoginService, private router: Router, private authService : AuthGuardService) {
@@ -27,7 +27,7 @@ export class LoginComponent {
     if(user){
       this.authService.Authenticate(user)
       alert("Usuário existe")
-      this.router.navigate(['/worker']);
+      this.router.navigate(['/home']);
     }
     else{
       alert("Usuário não existe")

@@ -1,0 +1,27 @@
+<h1>Upload de imagens</h1>
+
+<h2>Banco de dados</h2>
+<br>
+
+<input type="file" name="file" (change)="onFileSelected($event)">
+<div>
+    <button type="submit" (click)="sendPhoto()">Upload</button>
+</div>
+
+<br>
+<br>
+
+<h2>Sistema de arquivos</h2>
+<br>
+
+<input type="file" name="file" (change)="onFileSelected($event)">
+<div>
+    <button type="submit" (click)="sendPhoto_2()">Upload</button>
+</div>
+
+
+<br>
+
+<img [src]="url">
+<p>{{teste.name}}</p>
+
